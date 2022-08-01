@@ -5,7 +5,7 @@ const tasks = require('./routes/tasksRoute')
 require('dotenv').config()
 
 
-//app.use(express.static('./public'))
+app.use(express.static('./public'))
 /**routes
  * /api/v1/tasks => GET all tasks
  * /api/v1/tasks/  => POST new task
@@ -20,10 +20,10 @@ app.use('/api/v1/tasks', tasks);
 
 
 const port = 5000
-const uri = process.env.DB_URI
+
 const start = async () => {
     try {
-        await startDB(uri)
+        await startDB(process.env.DB_URI)
         app.listen(port, () => {
             console.log(`server is ON Port num ${port}`)
         })
