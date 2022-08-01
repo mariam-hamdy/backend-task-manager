@@ -1,6 +1,8 @@
+const startDB = require('./db/connect')
 const express = require('express')
 const app = express()
 const tasks = require('./routes/tasksRoute')
+require('dotenv').config()
 
 
 //app.use(express.static('./public'))
@@ -18,6 +20,17 @@ app.use('/api/v1/tasks', tasks);
 
 
 const port = 5000
-app.listen(port, () => {
-    console.log('the server is ON')
-})
+const uri = process.env.DB_URI
+const start = async () => {
+    try {
+        await startDB(uri)
+        app.listen(port, () => {
+            console.log(`server is ON Port num ${port}`)
+        })
+        
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+start()

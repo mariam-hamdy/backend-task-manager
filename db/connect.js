@@ -1,1 +1,15 @@
-const connectionString = "mongodb+srv://mariam:<password>@nodeexpressprojects.y5ms5.mongodb.net/?retryWrites=true&w=majority"
+const mongoose = require('mongoose')
+
+
+const startDB = (uri) => {
+    return mongoose.connect(uri, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false,
+        useCreateIndex: true
+    })
+}
+
+
+
+module.exports = startDB
